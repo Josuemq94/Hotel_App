@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mis reservas | Hotel Pura Vida</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <main class="container" id="main-content">
+      <nav class="topbar" aria-label="Barra superior">
+        <a href="dashboard.html" class="brand">HOTEL PURA VIDA</a>
+        <div>
+          <span id="user-label"></span
+          ><button id="logout" class="secondary" type="button">Cerrar sesión</button>
+        </div>
+      </nav>
+      <header class="dashboard-header">
+        <div>
+          <p class="eyebrow">RESERVAS</p>
+          <h1 id="heading">Mis reservas</h1>
+        </div>
+        <a href="reservation.html" class="button">Nueva reserva</a>
+      </header>
+      <section class="card" id="admin-filter" style="display:none" aria-labelledby="admin-filter-heading">
+        <div class="section-heading">
+          <h2 id="admin-filter-heading">Filtrar por usuario</h2>
+        </div>
+        <label class="sr-only" for="user-filter">Filtrar reservas por usuario</label>
+        <select id="user-filter">
+          <option value="">Todos los usuarios</option>
+        </select>
+      </section>
+      <section class="card" aria-labelledby="reservations-heading">
+        <div class="section-heading">
+          <h2 id="reservations-heading">Reservas</h2>
+          <button id="refresh" class="secondary" type="button">Actualizar</button>
+        </div>
+        <div id="reservations" aria-live="polite"></div>
+      </section>
+    </main>
+    <script src="dashboard.js"></script>
+    <script src="nav.js"></script>
+</body>
+</html>

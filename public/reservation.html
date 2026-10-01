@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nueva reserva | Hotel Pura Vida</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <main class="container" id="main-content">
+      <nav class="topbar" aria-label="Barra superior">
+        <a href="dashboard.html" class="brand">← Mis reservas</a
+        ><button id="logout" class="secondary" type="button">Cerrar sesión</button>
+      </nav>
+      <header>
+        <p class="eyebrow">HOTEL PURA VIDA</p>
+        <h1 id="form-title">Crear una reserva</h1>
+        <p class="muted">
+          Selecciona una habitación y revisa el precio estimado antes de
+          confirmar.
+        </p>
+      </header>
+      <section class="room-grid" id="room-cards" aria-label="Tipos de habitación"></section>
+      <section class="card">
+        <form id="reservation-form" aria-label="Formulario de reserva">
+          <input type="hidden" id="reservation-id" />
+          <div class="grid">
+            <label
+              >Nombre completo<input
+                id="guestName"
+                name="guestName"
+                required
+                minlength="2" /></label
+            ><label
+              >Correo<input
+                id="email"
+                name="email"
+                type="email"
+                required /></label
+            ><label
+              >Habitación<select id="roomType" name="roomType" required>
+                <option value="standard">Standard</option>
+                <option value="deluxe">Deluxe</option>
+                <option value="suite">Suite</option>
+              </select></label
+            ><label
+              >Huéspedes<input
+                id="guests"
+                name="guests"
+                type="number"
+                min="1"
+                max="10"
+                value="1"
+                required /></label
+            ><label
+              >Entrada<input
+                id="checkIn"
+                name="checkIn"
+                type="date"
+                required /></label
+            ><label
+              >Salida<input id="checkOut" name="checkOut" type="date" required
+            /></label>
+          </div>
+          <div class="estimate">
+            Precio estimado: <strong id="estimate" aria-live="polite">$0</strong>
+          </div>
+          <div class="actions">
+            <button type="submit">Confirmar reserva</button
+            ><a class="button secondary" href="dashboard.html">Volver</a>
+          </div>
+        </form>
+      </section>
+    </main>
+    <script src="reservation.js"></script>
+    <script src="nav.js"></script>
+</body>
+</html>

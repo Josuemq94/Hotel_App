@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Habitaciones | Hotel Pura Vida</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <main class="container" id="main-content">
+      <nav class="topbar" aria-label="Barra superior">
+        <a href="dashboard.html" class="brand">← Volver</a>
+        <div>
+          <span id="user-label"></span
+          ><button id="logout" class="secondary" type="button">
+            Cerrar sesión
+          </button>
+        </div>
+      </nav>
+      <header>
+        <p class="eyebrow">HOTEL PURA VIDA</p>
+        <h1>Habitaciones</h1>
+        <p class="muted">
+          Consulta la disponibilidad por fechas o, si eres administrador,
+          gestiona el inventario completo de habitaciones.
+        </p>
+      </header>
+
+      <section class="card" aria-labelledby="availability-heading">
+        <div class="section-heading">
+          <h2 id="availability-heading">Buscar disponibilidad</h2>
+        </div>
+        <form id="availability-form" class="grid">
+          <label
+            >Tipo de habitación
+            <select id="availability-type" name="type">
+              <option value="">Cualquiera</option>
+              <option value="standard">Standard</option>
+              <option value="deluxe">Deluxe</option>
+              <option value="suite">Suite</option>
+            </select>
+          </label>
+          <label
+            >Entrada
+            <input id="availability-checkIn" name="checkIn" type="date" required />
+          </label>
+          <label
+            >Salida
+            <input id="availability-checkOut" name="checkOut" type="date" required />
+          </label>
+        </form>
+        <div class="actions">
+          <button type="submit" form="availability-form">Buscar</button>
+          <span id="availability-count" class="muted" aria-live="polite"></span>
+        </div>
+        <div
+          id="availability-results"
+          class="availability-results"
+          aria-live="polite"
+        ></div>
+      </section>
+
+      <section class="card" id="manage-section" hidden aria-labelledby="manage-heading">
+        <div class="section-heading">
+          <h2 id="manage-heading">Gestionar habitaciones</h2>
+          <button id="new-room-btn" class="secondary" type="button">
+            + Nueva habitación
+          </button>
+        </div>
+
+        <form id="room-form" class="grid hidden" aria-label="Formulario de habitación">
+          <input type="hidden" id="room-id" />
+          <label
+            >Número<input
+              id="room-number"
+              name="number"
+              required
+              maxlength="20"
+          /></label>
+          <label
+            >Tipo
+            <select id="room-type" name="type" required>
+              <option value="standard">Standard</option>
+              <option value="deluxe">Deluxe</option>
+              <option value="suite">Suite</option>
+            </select>
+          </label>
+          <label
+            >Capacidad<input
+              id="room-capacity"
+              name="capacity"
+              type="number"
+              min="1"
+              max="10"
+              value="2"
+              required
+          /></label>
+          <label
+            >Precio por noche (USD)<input
+              id="room-price"
+              name="pricePerNight"
+              type="number"
+              min="0"
+              step="0.01"
+              required
+          /></label>
+          <label
+            >Estado
+            <select id="room-status" name="status">
+              <option value="available">Disponible</option>
+              <option value="maintenance">Mantenimiento</option>
+            </select>
+          </label>
+          <div class="actions">
+            <button type="submit" id="room-form-submit">Guardar habitación</button>
+            <button type="button" id="room-form-cancel" class="secondary">
+              Cancelar
+            </button>
+          </div>
+        </form>
+
+        <div
+          id="room-list"
+          class="room-manage-list"
+          aria-live="polite"
+          aria-label="Lista de habitaciones"
+        ></div>
+      </section>
+    </main>
+    <script src="rooms.js"></script>
+    <script src="nav.js"></script>
+  </body>
+</html>

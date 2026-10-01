@@ -1,0 +1,126 @@
+{
+  "info": {
+    "_postman_id": "b67f18e6-5d0f-4dd9-a3cc-7b9c9de3bb11",
+    "name": "Hotel Pura Vida API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api" },
+    { "key": "reservationId", "value": "" },
+    { "key": "googleCredential", "value": "paste-google-credential-here" }
+  ],
+  "item": [
+    {
+      "name": "Google login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"credential\":\"{{googleCredential}}\"}" },
+        "url": "{{baseUrl}}/auth/google"
+      }
+    },
+    {
+      "name": "Authenticated session (one reservation query)",
+      "request": { "method": "GET", "url": "{{baseUrl}}/auth/session" }
+    },
+    {
+      "name": "Logout",
+      "request": { "method": "POST", "url": "{{baseUrl}}/auth/logout" }
+    },
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+    },
+    {
+      "name": "List reservations",
+      "request": { "method": "GET", "url": "{{baseUrl}}/reservations" }
+    },
+    {
+      "name": "Create reservation",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"guestName\":\"John Doe\",\"email\":\"john@example.com\",\"roomType\":\"deluxe\",\"checkIn\":\"2026-10-10\",\"checkOut\":\"2026-10-13\",\"guests\":2}"
+        },
+        "url": "{{baseUrl}}/reservations"
+      }
+    },
+    {
+      "name": "Get reservation",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/reservations/{{reservationId}}"
+      }
+    },
+    {
+      "name": "Update reservation",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"guestName\":\"John Doe\",\"email\":\"john@example.com\",\"roomType\":\"suite\",\"checkIn\":\"2026-10-10\",\"checkOut\":\"2026-10-14\",\"guests\":3,\"status\":\"confirmed\"}"
+        },
+        "url": "{{baseUrl}}/reservations/{{reservationId}}"
+      }
+    },
+    {
+      "name": "Delete reservation",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/reservations/{{reservationId}}"
+      }
+    },
+    {
+      "name": "List rooms",
+      "request": { "method": "GET", "url": "{{baseUrl}}/rooms" }
+    },
+    {
+      "name": "Available rooms",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/rooms/available?checkIn=2026-10-10&checkOut=2026-10-13&type=deluxe"
+      }
+    },
+    {
+      "name": "Create room",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"number\":\"101\",\"type\":\"deluxe\",\"capacity\":3,\"pricePerNight\":130}"
+        },
+        "url": "{{baseUrl}}/rooms"
+      }
+    },
+    {
+      "name": "Get room",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/rooms/{{reservationId}}"
+      }
+    },
+    {
+      "name": "Update room",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"number\":\"101\",\"type\":\"deluxe\",\"capacity\":3,\"pricePerNight\":140,\"status\":\"maintenance\"}"
+        },
+        "url": "{{baseUrl}}/rooms/{{reservationId}}"
+      }
+    },
+    {
+      "name": "Delete room",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/rooms/{{reservationId}}"
+      }
+    }
+  ]
+}

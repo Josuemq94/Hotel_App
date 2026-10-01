@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registro de cliente | Hotel Pura Vida</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="landing auth-page">
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <main class="auth-layout" id="main-content">
+      <a class="site-logo" href="index.html">HOTEL PURA VIDA</a>
+      <section class="auth-card card">
+        <p class="eyebrow">NUEVO CLIENTE</p>
+        <h1>Crear cuenta</h1>
+        <p class="muted">
+          Crea tu cuenta de cliente con tus datos o continúa con Google.
+        </p>
+        <form id="register-form" class="register-form">
+          <label
+            >Nombre completo<input
+              id="register-name"
+              name="name"
+              required
+              minlength="2"
+              maxlength="100"
+              autocomplete="name"
+          /></label>
+          <label
+            >Correo electrónico<input
+              id="register-email"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+          /></label>
+          <label
+            >Contraseña<input
+              id="register-password"
+              name="password"
+              type="password"
+              required
+              minlength="6"
+              autocomplete="new-password" 
+          /></label>
+          <button type="submit">Crear cuenta de cliente</button>
+        </form>
+        <p class="auth-switch">
+          ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a>
+        </p>
+      </section>
+    </main>
+    <script src="auth-page.js"></script>
+    <script src="nav.js"></script>
+</body>
+</html>
