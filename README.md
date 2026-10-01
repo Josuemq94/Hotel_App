@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Hotel Pura Vida
 
 Aplicación de reservas hoteleras con Node.js, Express, MongoDB y frontend HTML/CSS/JavaScript vanilla.
@@ -40,3 +41,7 @@ ADMIN_EMAILS=jmoralesq@ucenfotec.ac.cr
 Google verifica el token en el backend. Las reservas de un usuario regular se filtran por su usuario; el correo de `ADMIN_EMAILS` recibe permisos administrativos para consultar, editar y cancelar cualquier reserva.
 
 El registro de clientes también permite ingresar nombre y correo desde `register.html`. Este registro no crea una contraseña: el cliente debe iniciar sesión posteriormente con Google usando el mismo correo. El endpoint es `POST /api/auth/register`.
+=======
+# Hotel_App
+App para Hotel con reservas 
+>>>>>>> a9ce3183050c2f9c4404e97262bbe480ecd40063
