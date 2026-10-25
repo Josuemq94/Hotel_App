@@ -1,48 +1,19 @@
 const { AuthService, RoomService, ReservationService } = require('../services/api.services');
 const fixtures = require('../data/fixtures');
+const { registerUser, extractAuthToken } = require('../support/session');
 
 describe('Suite de Pruebas API - Hotel Pura Vida', () => {
     let mainUser = fixtures.generateRandomUser();
     let availableRoomId = null;
 
-    beforeAll(() => {
+    // Setup: registra el usuario que usan los bloques de Login y Reservaciones
+    beforeAll(async () => {
         global.authToken = null;
+        await registerUser(mainUser);
     });
 
     // --- 1. POST /api/auth/register ---
-    describe('1. Endpoint: Registro de Usuarios', () => {
-        it('TC01: Registro exitoso (200/201)', async () => {
-            const res = await AuthService.register(mainUser);
-            expect([200, 201]).toContain(res.status);
-            expect(res.data).toHaveProperty('data');
-            expect(res.data.data.email).toBe(mainUser.email);
-        });
-
-        it('TC02: Falla por falta de nombre (400)', async () => {
-            const res = await AuthService.register(fixtures.INVALID_USERS.missingName);
-            expect(res.status).toBe(400);
-        });
-
-        it('TC03: Falla por falta de correo (400)', async () => {
-            const res = await AuthService.register(fixtures.INVALID_USERS.missingEmail);
-            expect(res.status).toBe(400);
-        });
-
-        it('TC04: Falla por falta de contraseña (400)', async () => {
-            const res = await AuthService.register(fixtures.INVALID_USERS.missingPassword);
-            expect(res.status).toBe(400);
-        });
-
-        it('TC05: Falla por contraseña corta (400)', async () => {
-            const res = await AuthService.register(fixtures.INVALID_USERS.shortPassword);
-            expect(res.status).toBe(400);
-        });
-
-        it('TC06: Falla por correo duplicado (400/409)', async () => {
-            const res = await AuthService.register(mainUser);
-            expect([400, 409]).toContain(res.status);
-        });
-    });
+    // Casos en auth-register.test.js
 
     // --- 2. POST /api/auth/login ---
     describe('2. Endpoint: Login de Usuarios', () => {
@@ -50,7 +21,8 @@ describe('Suite de Pruebas API - Hotel Pura Vida', () => {
             const res = await AuthService.login({ email: mainUser.email, password: mainUser.password });
             expect(res.status).toBe(200);
             
-            const token = res.data.token || (res.data.data && res.data.data.token);
+            // La API entrega el token en la cookie httpOnly "hotel_token", no en el body
+            const token = extractAuthToken(res);
             expect(token).toBeDefined();
             global.authToken = token; 
         });
@@ -123,49 +95,7 @@ describe('Suite de Pruebas API - Hotel Pura Vida', () => {
     });
 
     // --- 4. POST /api/reservations ---
-    describe('4. Endpoint: Crear Reservaciones', () => {
-        it('TC19: Falla sin Token (401)', async () => {
-            const tempToken = global.authToken;
-            global.authToken = null; 
-            const payload = fixtures.getReservationPayload(availableRoomId);
-            const res = await ReservationService.createReservation(payload);
-            expect(res.status).toBe(401);
-            global.authToken = tempToken; 
-        });
-
-        it('TC20: Creación exitosa (200/201)', async () => {
-            const payload = fixtures.getReservationPayload(availableRoomId);
-            const res = await ReservationService.createReservation(payload);
-            expect([200, 201, 400]).toContain(res.status); // 400 tolerado por si el mock id no existe
-        });
-
-        it('TC21: Falla sin roomId (400)', async () => {
-            let payload = fixtures.getReservationPayload(availableRoomId);
-            delete payload.roomId;
-            const res = await ReservationService.createReservation(payload);
-            expect(res.status).toBe(400);
-        });
-
-        it('TC22: Falla con formato roomId inválido (400)', async () => {
-            let payload = fixtures.getReservationPayload("invalid-id-format");
-            const res = await ReservationService.createReservation(payload);
-            expect(res.status).toBe(400);
-        });
-
-        it('TC23: Falla sin cantidad de huéspedes (400)', async () => {
-            let payload = fixtures.getReservationPayload(availableRoomId);
-            delete payload.guests;
-            const res = await ReservationService.createReservation(payload);
-            expect(res.status).toBe(400);
-        });
-
-        it('TC24: Falla validación de negocio (400)', async () => {
-            let payload = fixtures.getReservationPayload(availableRoomId);
-            delete payload.checkIn;
-            const res = await ReservationService.createReservation(payload);
-            expect(res.status).toBe(400);
-        });
-    });
+    // Casos en reservations-create.test.js
 
     // --- 5. GET /api/reservations ---
     describe('5. Endpoint: Consultar Reservaciones', () => {
