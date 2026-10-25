@@ -27,6 +27,9 @@ class ReservationService {
     async getReservations(params = {}) {
         return await apiClient.get('/reservations', { params });
     }
+    async deleteReservation(id) {
+        return await apiClient.delete(`/reservations/${id}`);
+    }
 }
 
 module.exports = {
