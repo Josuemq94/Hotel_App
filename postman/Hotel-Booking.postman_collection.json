@@ -31,6 +31,7 @@
       "name": "Health",
       "request": { "method": "GET", "url": "{{baseUrl}}/health" }
     },
+    
     {
       "name": "List reservations",
       "request": { "method": "GET", "url": "{{baseUrl}}/reservations" }
