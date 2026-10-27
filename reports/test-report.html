@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte de pruebas API - Hotel Pura Vida</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; background: #f4f6f8; color: #1d2733; }
+  header { background: #0b3d91; color: #fff; padding: 24px 32px; }
+  header h1 { margin: 0 0 4px; font-size: 22px; }
+  header p { margin: 0; opacity: .85; font-size: 14px; }
+  main { max-width: 1040px; margin: 24px auto; padding: 0 16px; }
+  .verdict { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-weight: 600; color: #fff; }
+  .verdict.ok { background: #1a9d55; } .verdict.failed { background: #d64545; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .card { background: #fff; border-radius: 8px; padding: 14px 16px; border-left: 5px solid #8a96a3; font-size: 13px; }
+  .card b { display: block; font-size: 26px; }
+  .card.passed { border-color: #1a9d55; } .card.failed { border-color: #d64545; } .card.defect { border-color: #e0932b; }
+  .filters { margin-bottom: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .filters button { border: 1px solid #c5ced8; background: #fff; border-radius: 16px; padding: 5px 14px; cursor: pointer; font-size: 13px; }
+  .filters button.active { background: #0b3d91; color: #fff; border-color: #0b3d91; }
+  section { background: #fff; border-radius: 8px; margin-bottom: 20px; padding: 8px 16px 12px; }
+  h2 { font-size: 15px; font-family: ui-monospace, monospace; color: #0b3d91; }
+  .count { font-family: system-ui, sans-serif; font-weight: 400; font-size: 12px; color: #6b7785; margin-left: 8px; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 8px 6px; border-top: 1px solid #e6eaee; vertical-align: top; font-size: 14px; }
+  td.id { font-family: ui-monospace, monospace; font-size: 12px; white-space: nowrap; color: #4b5866; }
+  td.ms { white-space: nowrap; color: #6b7785; text-align: right; }
+  .group { color: #6b7785; font-size: 12px; margin-top: 2px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; color: #fff; white-space: nowrap; }
+  .badge.passed { background: #1a9d55; } .badge.failed { background: #d64545; }
+  .badge.defect { background: #e0932b; } .badge.skipped { background: #8a96a3; }
+  pre { background: #1d2733; color: #e6eaee; padding: 10px; border-radius: 6px; overflow-x: auto; font-size: 12px; white-space: pre-wrap; }
+  summary { cursor: pointer; color: #0b3d91; font-size: 12px; margin-top: 4px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Reporte de pruebas API: Hotel Pura Vida</h1>
+  <p>Ejecutado el 26/10/2026, 9:14:43 p. m. · duración 2.6 s · 3 suites</p>
+</header>
+<main>
+  <div class="verdict ok">Sin fallos inesperados · 1 defecto(s) conocido(s) documentado(s)</div>
+  <div class="cards">
+    <div class="card"><b>30</b>Casos ejecutados</div>
+    <div class="card passed"><b>29</b>Exitosos</div>
+    <div class="card defect"><b>1</b>Defectos conocidos</div>
+    <div class="card failed"><b>0</b>Fallos inesperados</div>
+  </div>
+  <div class="filters">
+    <button class="active" data-filter="all">Todos</button>
+    <button data-filter="passed">Exitosos</button>
+    <button data-filter="defect">Defectos conocidos</button>
+    <button data-filter="failed">Fallos inesperados</button>
+  </div>
+  
+    <section>
+      <h2>src/tests/hotel-api.test.js <span class="count">18/18 exitosos</span></h2>
+      
+      <table>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC07</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Login exitoso y obtención de token (200)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios</div>
+            
+          </td>
+          <td class="ms">81 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC08</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Validación de estructura de respuesta<div class="group">Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios</div>
+            
+          </td>
+          <td class="ms">78 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC09</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla con contraseña incorrecta (401)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios</div>
+            
+          </td>
+          <td class="ms">79 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC10</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla con correo inexistente (401)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC11</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla sin enviar email (400)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios</div>
+            
+          </td>
+          <td class="ms">8 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC12</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla sin enviar contraseña (400)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC13</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Consulta válida (200)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones</div>
+            
+          </td>
+          <td class="ms">16 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC14</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Consulta sin especificar tipo (200)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones</div>
+            
+          </td>
+          <td class="ms">15 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC15</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla sin Check-In (400)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones</div>
+            
+          </td>
+          <td class="ms">16 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC16</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla sin Check-Out (400)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC17</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla fechas ilógicas (400)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC18</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Estructura contiene data<div class="group">Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones</div>
+            
+          </td>
+          <td class="ms">10 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC25</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Listado exitoso (200)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones</div>
+            
+          </td>
+          <td class="ms">13 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC26</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Ignora el parámetro userId si el usuario no es admin (200)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones</div>
+            
+          </td>
+          <td class="ms">16 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC27</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Ordena de la más reciente a la más antigua (200)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones</div>
+            
+          </td>
+          <td class="ms">14 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC28</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla sin Token (401)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC29</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Falla con Token inválido (401)<div class="group">Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones</div>
+            
+          </td>
+          <td class="ms">10 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">TC30</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>Estructura contiene data<div class="group">Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones</div>
+            
+          </td>
+          <td class="ms">14 ms</td>
+        </tr></table>
+    </section>
+    <section>
+      <h2>src/tests/reservations-create.test.js <span class="count">6/7 exitosos</span></h2>
+      
+      <table>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">RES-01</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>crea una reserva válida con el estado inicial, el dueño y el precio correctos<div class="group">Endpoint: Crear reserva (POST /reservations) › Escenarios positivos (201)</div>
+            
+          </td>
+          <td class="ms">9 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">RES-02</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>acepta huéspedes en el límite superior (10)<div class="group">Endpoint: Crear reserva (POST /reservations) › Escenarios positivos (201)</div>
+            
+          </td>
+          <td class="ms">8 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">RES-03</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>rechaza huéspedes sobre el límite (11)<div class="group">Endpoint: Crear reserva (POST /reservations) › Escenarios negativos: validación de datos (400)</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">RES-04</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>rechaza check-out el mismo día del check-in (0 noches)<div class="group">Endpoint: Crear reserva (POST /reservations) › Escenarios negativos: validación de datos (400)</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">RES-05</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>rechaza tipo de habitación fuera del catálogo<div class="group">Endpoint: Crear reserva (POST /reservations) › Escenarios negativos: validación de datos (400)</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">RES-06</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>rechaza una reserva válida enviada sin sesión<div class="group">Endpoint: Crear reserva (POST /reservations) › Escenario negativo: autenticación (401)</div>
+            
+          </td>
+          <td class="ms">6 ms</td>
+        </tr>
+        <tr class="row defect" data-outcome="defect">
+          <td class="id">RES-07</td>
+          <td><span class="badge defect">Defecto conocido</span></td>
+          <td>[DEFECTO] un usuario sin rol admin no puede crear la reserva ya confirmada<div class="group">Endpoint: Crear reserva (POST /reservations) › Defectos detectados (fallan mientras el defecto exista)</div>
+            <details><summary>Ver detalle del fallo</summary><pre>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: &quot;pending&quot;
+Received: &quot;confirmed&quot;
+    at toBe (C:\Users\jdani\OneDrive\Escritorio\Proyectos\Hotel_App\src\tests\reservations-create.test.js:82:46)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)</pre></details>
+          </td>
+          <td class="ms">16 ms</td>
+        </tr></table>
+    </section>
+    <section>
+      <h2>src/tests/auth-register.test.js <span class="count">5/5 exitosos</span></h2>
+      
+      <table>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">REG-01</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>registra un usuario válido y responde solo sus datos públicos<div class="group">Endpoint: Registro de usuarios (POST /auth/register) › Escenario positivo (201)</div>
+            
+          </td>
+          <td class="ms">78 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">REG-02</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>rechaza contraseña bajo el límite (5 caracteres)<div class="group">Endpoint: Registro de usuarios (POST /auth/register) › Escenarios negativos: validación de datos (400)</div>
+            
+          </td>
+          <td class="ms">6 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">REG-03</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>rechaza email sin arroba<div class="group">Endpoint: Registro de usuarios (POST /auth/register) › Escenarios negativos: validación de datos (400)</div>
+            
+          </td>
+          <td class="ms">6 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">REG-04</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>rechaza el registro sin el campo obligatorio &quot;name&quot;<div class="group">Endpoint: Registro de usuarios (POST /auth/register) › Escenarios negativos: validación de datos (400)</div>
+            
+          </td>
+          <td class="ms">6 ms</td>
+        </tr>
+        <tr class="row passed" data-outcome="passed">
+          <td class="id">REG-05</td>
+          <td><span class="badge passed">Exitoso</span></td>
+          <td>rechaza un email ya registrado<div class="group">Endpoint: Registro de usuarios (POST /auth/register) › Escenario negativo: email duplicado (409)</div>
+            
+          </td>
+          <td class="ms">7 ms</td>
+        </tr></table>
+    </section>
+</main>
+<script>
+  document.querySelectorAll('.filters button').forEach(function (button) {
+    button.addEventListener('click', function () {
+      document.querySelectorAll('.filters button').forEach(function (b) { b.classList.remove('active'); });
+      button.classList.add('active');
+      var filter = button.dataset.filter;
+      document.querySelectorAll('.row').forEach(function (row) {
+        row.classList.toggle('hidden', filter !== 'all' && row.dataset.outcome !== filter);
+      });
+    });
+  });
+</script>
+</body>
+</html>

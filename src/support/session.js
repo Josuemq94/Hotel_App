@@ -52,10 +52,13 @@ const createSession = async () => {
     return { user, token };
 };
 
-/** Ejecuta una llamada sin sesión y restaura el token aunque la llamada falle. */
-const withoutAuth = async (action) => {
+/**
+ * Ejecuta una llamada con un token específico (por ejemplo, uno inválido) y
+ * restaura el token anterior aunque la llamada o una assertion fallen.
+ */
+const withToken = async (token, action) => {
     const previousToken = global.authToken;
-    global.authToken = null;
+    global.authToken = token;
     try {
         return await action();
     } finally {
@@ -63,4 +66,7 @@ const withoutAuth = async (action) => {
     }
 };
 
-module.exports = { AUTH_COOKIE, extractAuthToken, registerUser, createSession, withoutAuth };
+/** Ejecuta una llamada sin sesión (token nulo) y restaura el token anterior. */
+const withoutAuth = (action) => withToken(null, action);
+
+module.exports = { AUTH_COOKIE, extractAuthToken, registerUser, createSession, withToken, withoutAuth };

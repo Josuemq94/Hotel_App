@@ -1,0 +1,271 @@
+{
+  "summary": {
+    "date": "26/10/2026, 9:14:43 p. m.",
+    "seconds": "2.6",
+    "suites": 3,
+    "total": 30,
+    "passed": 29,
+    "defect": 1,
+    "failed": 0
+  },
+  "files": [
+    {
+      "file": "src/tests/hotel-api.test.js",
+      "suiteError": null,
+      "tests": [
+        {
+          "id": "TC07",
+          "title": "Login exitoso y obtención de token (200)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios",
+          "outcome": "passed",
+          "duration": 81,
+          "message": ""
+        },
+        {
+          "id": "TC08",
+          "title": "Validación de estructura de respuesta",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios",
+          "outcome": "passed",
+          "duration": 78,
+          "message": ""
+        },
+        {
+          "id": "TC09",
+          "title": "Falla con contraseña incorrecta (401)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios",
+          "outcome": "passed",
+          "duration": 79,
+          "message": ""
+        },
+        {
+          "id": "TC10",
+          "title": "Falla con correo inexistente (401)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        },
+        {
+          "id": "TC11",
+          "title": "Falla sin enviar email (400)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios",
+          "outcome": "passed",
+          "duration": 8,
+          "message": ""
+        },
+        {
+          "id": "TC12",
+          "title": "Falla sin enviar contraseña (400)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 2. Endpoint: Login de Usuarios",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        },
+        {
+          "id": "TC13",
+          "title": "Consulta válida (200)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones",
+          "outcome": "passed",
+          "duration": 16,
+          "message": ""
+        },
+        {
+          "id": "TC14",
+          "title": "Consulta sin especificar tipo (200)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones",
+          "outcome": "passed",
+          "duration": 15,
+          "message": ""
+        },
+        {
+          "id": "TC15",
+          "title": "Falla sin Check-In (400)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones",
+          "outcome": "passed",
+          "duration": 16,
+          "message": ""
+        },
+        {
+          "id": "TC16",
+          "title": "Falla sin Check-Out (400)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        },
+        {
+          "id": "TC17",
+          "title": "Falla fechas ilógicas (400)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        },
+        {
+          "id": "TC18",
+          "title": "Estructura contiene data",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 3. Endpoint: Disponibilidad de Habitaciones",
+          "outcome": "passed",
+          "duration": 10,
+          "message": ""
+        },
+        {
+          "id": "TC25",
+          "title": "Listado exitoso (200)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones",
+          "outcome": "passed",
+          "duration": 13,
+          "message": ""
+        },
+        {
+          "id": "TC26",
+          "title": "Ignora el parámetro userId si el usuario no es admin (200)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones",
+          "outcome": "passed",
+          "duration": 16,
+          "message": ""
+        },
+        {
+          "id": "TC27",
+          "title": "Ordena de la más reciente a la más antigua (200)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones",
+          "outcome": "passed",
+          "duration": 14,
+          "message": ""
+        },
+        {
+          "id": "TC28",
+          "title": "Falla sin Token (401)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        },
+        {
+          "id": "TC29",
+          "title": "Falla con Token inválido (401)",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones",
+          "outcome": "passed",
+          "duration": 10,
+          "message": ""
+        },
+        {
+          "id": "TC30",
+          "title": "Estructura contiene data",
+          "group": "Suite de Pruebas API - Hotel Pura Vida › 5. Endpoint: Consultar Reservaciones",
+          "outcome": "passed",
+          "duration": 14,
+          "message": ""
+        }
+      ]
+    },
+    {
+      "file": "src/tests/reservations-create.test.js",
+      "suiteError": null,
+      "tests": [
+        {
+          "id": "RES-01",
+          "title": "crea una reserva válida con el estado inicial, el dueño y el precio correctos",
+          "group": "Endpoint: Crear reserva (POST /reservations) › Escenarios positivos (201)",
+          "outcome": "passed",
+          "duration": 9,
+          "message": ""
+        },
+        {
+          "id": "RES-02",
+          "title": "acepta huéspedes en el límite superior (10)",
+          "group": "Endpoint: Crear reserva (POST /reservations) › Escenarios positivos (201)",
+          "outcome": "passed",
+          "duration": 8,
+          "message": ""
+        },
+        {
+          "id": "RES-03",
+          "title": "rechaza huéspedes sobre el límite (11)",
+          "group": "Endpoint: Crear reserva (POST /reservations) › Escenarios negativos: validación de datos (400)",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        },
+        {
+          "id": "RES-04",
+          "title": "rechaza check-out el mismo día del check-in (0 noches)",
+          "group": "Endpoint: Crear reserva (POST /reservations) › Escenarios negativos: validación de datos (400)",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        },
+        {
+          "id": "RES-05",
+          "title": "rechaza tipo de habitación fuera del catálogo",
+          "group": "Endpoint: Crear reserva (POST /reservations) › Escenarios negativos: validación de datos (400)",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        },
+        {
+          "id": "RES-06",
+          "title": "rechaza una reserva válida enviada sin sesión",
+          "group": "Endpoint: Crear reserva (POST /reservations) › Escenario negativo: autenticación (401)",
+          "outcome": "passed",
+          "duration": 6,
+          "message": ""
+        },
+        {
+          "id": "RES-07",
+          "title": "[DEFECTO] un usuario sin rol admin no puede crear la reserva ya confirmada",
+          "group": "Endpoint: Crear reserva (POST /reservations) › Defectos detectados (fallan mientras el defecto exista)",
+          "outcome": "defect",
+          "duration": 16,
+          "message": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"pending\"\nReceived: \"confirmed\"\n    at toBe (C:\\Users\\jdani\\OneDrive\\Escritorio\\Proyectos\\Hotel_App\\src\\tests\\reservations-create.test.js:82:46)\n    at processTicksAndRejections (node:internal/process/task_queues:104:5)"
+        }
+      ]
+    },
+    {
+      "file": "src/tests/auth-register.test.js",
+      "suiteError": null,
+      "tests": [
+        {
+          "id": "REG-01",
+          "title": "registra un usuario válido y responde solo sus datos públicos",
+          "group": "Endpoint: Registro de usuarios (POST /auth/register) › Escenario positivo (201)",
+          "outcome": "passed",
+          "duration": 78,
+          "message": ""
+        },
+        {
+          "id": "REG-02",
+          "title": "rechaza contraseña bajo el límite (5 caracteres)",
+          "group": "Endpoint: Registro de usuarios (POST /auth/register) › Escenarios negativos: validación de datos (400)",
+          "outcome": "passed",
+          "duration": 6,
+          "message": ""
+        },
+        {
+          "id": "REG-03",
+          "title": "rechaza email sin arroba",
+          "group": "Endpoint: Registro de usuarios (POST /auth/register) › Escenarios negativos: validación de datos (400)",
+          "outcome": "passed",
+          "duration": 6,
+          "message": ""
+        },
+        {
+          "id": "REG-04",
+          "title": "rechaza el registro sin el campo obligatorio \"name\"",
+          "group": "Endpoint: Registro de usuarios (POST /auth/register) › Escenarios negativos: validación de datos (400)",
+          "outcome": "passed",
+          "duration": 6,
+          "message": ""
+        },
+        {
+          "id": "REG-05",
+          "title": "rechaza un email ya registrado",
+          "group": "Endpoint: Registro de usuarios (POST /auth/register) › Escenario negativo: email duplicado (409)",
+          "outcome": "passed",
+          "duration": 7,
+          "message": ""
+        }
+      ]
+    }
+  ]
+}

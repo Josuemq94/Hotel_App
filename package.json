@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "jest --detectOpenHandles --verbose",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:report": "jest --detectOpenHandles --verbose --config jest.report.config.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
