@@ -1,12 +1,4 @@
-/**
- * Capa de datos: punto de entrada.
- *
- * - builders/: generan datos válidos y únicos (patrón Test Data Builder)
- * - cases/:    tablas de casos por endpoint (dato de entrada + resultado esperado)
- *
- * Los tests no escriben payloads a mano: los piden aquí. Para cambiar un dato
- * se edita esta capa, sin tocar la lógica de las pruebas.
- */
+
 const { aUser } = require('./builders/user.builder');
 const { aReservation } = require('./builders/reservation.builder');
 const registerCases = require('./cases/register.cases');
@@ -35,6 +27,13 @@ const ROOM_SEARCH = {
     invalidDates: { checkIn: "2026-11-05", checkOut: "2026-11-01" }
 };
 
+/** Datos trasladados desde los tests para evitar valores quemados (TC09, TC10, TC29) */
+const MANUAL_TEST_DATA = {
+    tc09: { password: 'WrongPassword!' },
+    tc10: { email: 'notexists@test.com', password: 'pwd' },
+    tc29: { invalidToken: 'INVALID_TOKEN_12345' }
+};
+
 /**
  * Payload de reserva válido según el contrato real de la API.
  * @deprecated Usar aReservation(). Se mantiene para no romper código existente.
@@ -50,5 +49,6 @@ module.exports = {
     generateRandomUser,
     INVALID_USERS,
     ROOM_SEARCH,
+    MANUAL_TEST_DATA,
     getReservationPayload
 };
