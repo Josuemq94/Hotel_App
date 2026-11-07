@@ -1,0 +1,179 @@
+# =============================================================================
+# Pipeline CI/CD – Hotel Pura Vida (Hotel_App)
+# BISOFT-17 · Caso de Estudio #3
+#
+# Flujo:  build  →  pruebas unitarias  →  pruebas API  →  análisis SonarQube
+# Se ejecuta en cada push y Pull Request hacia main. La rama main está
+# protegida: ningún PR se puede integrar si este pipeline no termina en verde.
+# =============================================================================
+name: CI - Hotel Pura Vida
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: # permite correrlo manualmente desde la pestaña Actions
+
+# Si llega un commit nuevo al mismo PR/rama, cancela la corrida anterior
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "20"
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # ETAPA 1 · Build: instala dependencias y valida que el código compile
+  # ---------------------------------------------------------------------------
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Instalar dependencias (npm ci)
+        run: npm ci
+
+      - name: Validar sintaxis del backend
+        run: |
+          find src -name "*.js" -print0 | xargs -0 -n1 node --check
+          echo "Sintaxis OK en todos los archivos de src/"
+
+  # ---------------------------------------------------------------------------
+  # ETAPA 2 · Pruebas unitarias: lógica de negocio aislada (sin BD) + coverage
+  # ---------------------------------------------------------------------------
+  unit-tests:
+    name: Pruebas unitarias
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Instalar dependencias (npm ci)
+        run: npm ci
+
+      - name: Ejecutar pruebas unitarias con cobertura
+        run: npm run test:unit
+
+      # coverage/lcov.info es el reporte que SonarQube usa para medir la cobertura
+      - name: Publicar reporte de cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-pruebas-unitarias
+          path: coverage/
+
+  # ---------------------------------------------------------------------------
+  # ETAPA 3 · Pruebas API: levanta MongoDB + la API dentro del runner
+  # ---------------------------------------------------------------------------
+  api-tests:
+    name: Pruebas API
+    needs: unit-tests
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:7.0
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      PORT: 3000
+      MONGODB_URI: mongodb://localhost:27017/hotel_pura_vida_ci
+      BASE_URL: http://localhost:3000/api
+      ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Instalar dependencias (npm ci)
+        run: npm ci
+
+      # Usa el secret JWT_SECRET si existe; si no, genera uno aleatorio solo
+      # para esta corrida. Nunca queda escrito en el repo y se oculta en los logs.
+      - name: Preparar JWT_SECRET de la corrida
+        env:
+          REPO_JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: |
+          SECRET="${REPO_JWT_SECRET:-$(openssl rand -hex 32)}"
+          echo "::add-mask::$SECRET"
+          echo "JWT_SECRET=$SECRET" >> "$GITHUB_ENV"
+
+      - name: Levantar la API en segundo plano
+        run: |
+          nohup npm start > api.log 2>&1 &
+          echo "API iniciando en el puerto $PORT"
+
+      - name: Esperar a que la API responda (health check)
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf "$BASE_URL/health" > /dev/null; then
+              echo "API lista después de ${i}s"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "La API no respondió a tiempo"
+          cat api.log
+          exit 1
+
+      # >>> PERSONA 2: agregar aquí la ejecución de las pruebas API <<<
+      # Ejemplo:
+      # - name: Ejecutar pruebas API (Jest + Axios)
+      #   run: npm run test:report
+      #
+      # - name: Publicar reporte de pruebas como evidencia
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: reporte-pruebas-api
+      #     path: reports/
+
+      - name: Log de la API (solo si algo falla)
+        if: failure()
+        run: cat api.log
+
+  # ---------------------------------------------------------------------------
+  # ETAPA 4 · Análisis estático con SonarQube
+  # ---------------------------------------------------------------------------
+  # >>> PERSONA 3: agregar aquí el job de SonarQube <<<
+  # sonarqube:
+  #   name: Análisis SonarQube
+  #   needs: api-tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0   # Sonar necesita el historial completo
+  #     ...
