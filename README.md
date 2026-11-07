@@ -1,5 +1,6 @@
-
 # Hotel Pura Vida
+
+[![CI - Hotel Pura Vida](https://github.com/Josuemq94/Hotel_App/actions/workflows/ci.yml/badge.svg)](https://github.com/Josuemq94/Hotel_App/actions/workflows/ci.yml)
 
 Aplicación de reservas hoteleras con Node.js, Express, MongoDB y frontend HTML/CSS/JavaScript vanilla.
 

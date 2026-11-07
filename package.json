@@ -8,6 +8,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "jest --detectOpenHandles --verbose",
+    "test:unit": "jest --config jest.unit.config.js",
+    "test:api": "jest src/tests --detectOpenHandles --verbose",
     "test:coverage": "jest --coverage",
     "test:report": "jest --detectOpenHandles --verbose --config jest.report.config.js"
   },
