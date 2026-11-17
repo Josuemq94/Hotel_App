@@ -148,17 +148,23 @@ jobs:
           cat api.log
           exit 1
 
-      # >>> PERSONA 2: agregar aquí la ejecución de las pruebas API <<<
-      # Ejemplo:
-      # - name: Ejecutar pruebas API (Jest + Axios)
-      #   run: npm run test:report
-      #
-      # - name: Publicar reporte de pruebas como evidencia
-      #   if: always()
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: reporte-pruebas-api
-      #     path: reports/
+      # Corre las pruebas API (src/tests) y genera el reporte HTML en reports/.
+      # Excluye los casos marcados [DEFECTO], que se ejecutan en el paso siguiente.
+      - name: Ejecutar pruebas API (Jest + Axios)
+        run: npx jest src/tests --config jest.report.config.js --detectOpenHandles --verbose --testNamePattern='^((?!DEFECTO).)*$'
+
+      # Defectos conocidos (RES-07): fallan a propósito mientras el defecto exista.
+      # Se ejecutan como evidencia, pero no bloquean la integración a main.
+      - name: Defectos conocidos (no bloquean)
+        continue-on-error: true
+        run: npx jest src/tests --detectOpenHandles --verbose --testNamePattern='DEFECTO'
+
+      - name: Publicar reporte de pruebas como evidencia
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-pruebas-api
+          path: reports/
 
       - name: Log de la API (solo si algo falla)
         if: failure()
@@ -167,13 +173,28 @@ jobs:
   # ---------------------------------------------------------------------------
   # ETAPA 4 · Análisis estático con SonarQube
   # ---------------------------------------------------------------------------
-  # >>> PERSONA 3: agregar aquí el job de SonarQube <<<
-  # sonarqube:
-  #   name: Análisis SonarQube
-  #   needs: api-tests
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0   # Sonar necesita el historial completo
-  #     ...
+  # Corre aunque las pruebas API fallen (defecto RES-07), siempre que las
+  # pruebas unitarias hayan pasado, porque de ellas sale la cobertura.
+  sonarqube:
+    name: Análisis SonarQube
+    needs: [unit-tests, api-tests]
+    if: always() && needs.unit-tests.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Sonar necesita el historial completo
+
+      # coverage/lcov.info generado en la etapa de pruebas unitarias
+      - name: Descargar cobertura de pruebas unitarias
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-pruebas-unitarias
+          path: coverage/
+
+      - name: Análisis SonarQube
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
