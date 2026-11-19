@@ -122,3 +122,5 @@ Además del status, cada caso valida el body: el contrato de la respuesta, los d
 - **Real:** la API responde 201 y la guarda como `confirmed`.
 
 El caso falla a propósito mientras el defecto exista.
+
+Demostraci�n del pipeline CI - Caso de estudio #3
